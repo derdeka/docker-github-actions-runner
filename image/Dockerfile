@@ -1,4 +1,4 @@
-FROM ghcr.io/actions/actions-runner:2.302.1 as actions-runner
+FROM ghcr.io/actions/actions-runner:2.303.0 as actions-runner
 
 FROM cypress/browsers:node18.12.0-chrome107
 
@@ -20,9 +20,9 @@ RUN mkdir -p /opt/hostedtoolcache
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-WORKDIR /actions-runner
+WORKDIR /home/runner
 
-COPY --from=actions-runner /actions-runner .
+COPY --from=actions-runner /home/runner .
 
 COPY token.sh entrypoint.sh app_token.sh /
 RUN chmod +x /token.sh /entrypoint.sh /app_token.sh
