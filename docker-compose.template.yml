@@ -2,13 +2,15 @@ version: '2.3'
 services:
   github-runner-1:
     build: ./image
-    restart: always
+    restart: on-failure:10
     environment:
+      # using RUNNER_TOKEN (valid for short time) or ACCESS_TOKEN (valid for long time)
+      ACCESS_TOKEN: <secret>
       REPO_URL: https://github.com/derdeka/docker-github-actions-runner
       RUNNER_NAME: github-runner-1
-      RUNNER_TOKEN: <secret>
       RUNNER_WORKDIR: /tmp/github-runner-1
-      LABELS: linux,x64,gpu,docker
+      LABELS: linux,x64,gpu,docker,cypress
+    shm_size: '2GB'
     security_opt:
       # needed on SELinux systems to allow docker container to manage other docker containers
       - label:disable
