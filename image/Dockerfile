@@ -1,6 +1,15 @@
-FROM ghcr.io/actions/actions-runner:2.300.2 as actions-runner
+FROM ghcr.io/actions/actions-runner:2.302.1 as actions-runner
 
 FROM cypress/browsers:node18.12.0-chrome107
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update \
+  && apt-get update \
+  && apt-get install -y --no-install-recommends \
+    jq \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
 
 ENV RUNNER_ALLOW_RUNASROOT=1
 ENV RUNNER_MANUALLY_TRAP_SIG=1
