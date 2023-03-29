@@ -18,4 +18,4 @@ This is a workaround to run cypress within a self-hosted github action runner, a
 
 - `cp docker-compose.template.yml docker-compose.yml`
 - replace `<secret>` in docker-compose.yml
-- `docker-compose up -d`
+- `docker-compose up --detach` or `docker-compose up --detach --build --force-recreate`
